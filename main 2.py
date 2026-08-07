@@ -237,17 +237,10 @@ class Controller:
         print("[+] Gemini AI Core [ONLINE - KEY CONFIGURED]")
         print("[+] Guaranteed Terminal Telemetry Delivery [ACTIVE]\n")
         
+                # Keep the cloud server and scheduler alive permanently
         while True:
-            try:
-                user_input = input("Diagnostic-Operator: ")
-                if not user_input:
-                    continue
-                if user_input.strip().lower() == 'exit':
-                    break
-                reply = self.generate_response(user_input)
-                print(f"\n{self.identity['name']}:\n{reply}\n")
-            except (KeyboardInterrupt, EOFError):
-                break
+            time.sleep(3600)
+
 
 class Memory:
     def __init__(self):
