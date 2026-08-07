@@ -236,18 +236,6 @@ class Controller:
         print("[+] Omega REST API Dashboard [ONLINE]")
         print("[+] Gemini AI Core [ONLINE - KEY CONFIGURED]")
         print("[+] Guaranteed Terminal Telemetry Delivery [ACTIVE]\n")
-        
-        while True:
-            try:
-                user_input = input("Diagnostic-Operator: ")
-                if not user_input:
-                    continue
-                if user_input.strip().lower() == 'exit':
-                    break
-                reply = self.generate_response(user_input)
-                print(f"\n{self.identity['name']}:\n{reply}\n")
-            except (KeyboardInterrupt, EOFError):
-                break
 
 class Memory:
     def __init__(self):
@@ -380,7 +368,6 @@ class ToolManager:
             msg['Subject'] = subject
             msg.attach(MIMEText(body, 'plain'))
 
-            # Updated to Gmail SMTP Server & Port 587
             smtp_server = "smtp.gmail.com"
             smtp_port = 587
             
@@ -430,4 +417,13 @@ class MultiAIConnector:
             return f"[Ryu Omega Synthesized Report]: Live telemetry successfully processed. Mission intelligence vectors secured:\n{tool_data}"
 
 if __name__ == "__main__":
-    Controller().run()
+    controller = Controller()
+    controller.run()
+    
+    # Keep the Render cloud container running via a non-blocking background loop
+    try:
+        while True:
+            time.sleep(3600)
+    except (KeyboardInterrupt, EOFError):
+        log("Shutting down Ryu-LiveAutonomous-Agent...")
+hu
